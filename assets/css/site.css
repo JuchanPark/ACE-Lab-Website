@@ -145,6 +145,14 @@ img { max-width: 100%; }
   text-decoration: none;
   text-align: center;
 }
+.wordmark-tag {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+}
 .nav-row {
   display: flex;
   justify-content: center;
