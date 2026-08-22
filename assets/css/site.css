@@ -183,3 +183,5 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+footer p { margin: 0; }
+footer p + p { margin-top: 0.4rem; }
