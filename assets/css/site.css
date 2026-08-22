@@ -124,10 +124,10 @@ img { max-width: 100%; }
   text-decoration: none;
 }
 .lab-logo-mark {
-  height: 3.47rem;
+  height: 3.32rem;
   width: auto;
   display: block;
-  margin-bottom: -0.55rem;
+  margin-bottom: -0.56rem;
 }
 .lab-logo-mark--dark { display: none; }
 @media (prefers-color-scheme: dark) {
@@ -149,11 +149,11 @@ img { max-width: 100%; }
   /* Scale the logo and wordmark down together, in the same proportion
      as the desktop sizes, so the hexagon-to-baseline alignment holds. */
   .brand-row { gap: 0.45rem; }
-  .lab-logo-mark { height: 2.05rem; margin-bottom: -0.32rem; }
+  .lab-logo-mark { height: 1.93rem; margin-bottom: -0.33rem; }
   .wordmark { font-size: 1.28rem; }
 }
 @media (max-width: 360px) {
-  .lab-logo-mark { height: 1.7rem; margin-bottom: -0.27rem; }
+  .lab-logo-mark { height: 1.6rem; margin-bottom: -0.27rem; }
   .wordmark { font-size: 1.06rem; }
 }
 .nav-row {
