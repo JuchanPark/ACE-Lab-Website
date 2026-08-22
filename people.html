@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People — ACE Lab</title>
+<meta name="description" content="ACE Lab's PI, current members, and alumni at KAIST GSMSE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  /* People hero + sub-tabs */
+  .people-hero { padding: clamp(2rem, 4.5vw, 3rem) 0 0; }
+  .people-hero h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    line-height: 1.1;
+    margin: 0;
+  }
+  .tab-nav {
+    display: flex;
+    gap: clamp(1.4rem, 3vw, 2.2rem);
+    margin: clamp(1.4rem, 3vw, 2rem) 0 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 2px solid var(--rule);
+  }
+  .tab-btn {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: none;
+    border: none;
+    padding: 0 0 0.85rem;
+    margin-bottom: -2px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .tab-panel { display: none; padding: clamp(2rem, 4.5vw, 3rem) 0 clamp(3rem, 6vw, 4.5rem); }
+  .tab-panel.is-active { display: block; }
+
+  /* PI profile */
+  .pi-profile {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 3rem);
+    align-items: start;
+  }
+  .pi-profile > * { min-width: 0; }
+  @media (max-width: 700px) {
+    .pi-profile { grid-template-columns: 1fr; }
+  }
+  .pi-photos { display: flex; gap: 0.6rem; min-width: 0; }
+  .pi-photo {
+    flex: 1;
+    min-width: 0;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    display: block;
+    width: 100%;
+    border: 1px solid var(--rule-soft);
+  }
+  .pi-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    margin: 0 0 0.3rem;
+  }
+  .pi-title {
+    font-size: 0.98rem;
+    color: var(--ink);
+    margin: 0 0 0.15rem;
+  }
+  .pi-affil {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 1.2rem;
+  }
+  .pi-bio {
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    max-width: 42rem;
+    margin: 0;
+  }
+  .pi-bio strong { color: var(--ink); font-weight: 600; }
+
+  /* CV blocks */
+  .cv-blocks {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+  @media (max-width: 700px) {
+    .cv-blocks { grid-template-columns: 1fr; }
+  }
+  .cv-block--status { grid-column: 1 / -1; }
+  .cv-heading {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.6rem;
+    margin: 0 0 0.9rem;
+  }
+  .cv-row {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 0.5rem 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  @media (max-width: 560px) {
+    .cv-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  }
+  .cv-row:last-child { border-bottom: none; }
+  .cv-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .cv-desc { font-size: 0.92rem; color: var(--ink); line-height: 1.5; }
+  .cv-desc .org { color: var(--ink-muted); }
+
+  .award-year {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    margin: 1rem 0 0.4rem;
+  }
+  .award-year:first-child { margin-top: 0; }
+  .award-item {
+    font-size: 0.92rem;
+    color: var(--ink);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    line-height: 1.5;
+  }
+  .award-item:last-of-type { border-bottom: none; }
+  .award-item .org { color: var(--ink-muted); }
+
+  /* Recruiting cards (Members tab) */
+  .join-note {
+    font-size: 0.98rem;
+    color: var(--ink-muted);
+    max-width: 42rem;
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  .join-note a { color: var(--accent); text-decoration: underline; }
+  .open-positions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  .open-card {
+    border: 1px solid var(--rule-soft);
+    padding: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .open-mark {
+    flex: none;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px dashed var(--accent);
+    color: var(--accent);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+  .open-role { font-weight: 600; font-size: 0.98rem; margin: 0 0 0.2rem; }
+  .open-status {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  /* Empty state (Alumni tab) */
+  .empty-state { padding: clamp(1.5rem, 4vw, 2.5rem) 0; max-width: 34rem; }
+  .empty-state h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    margin: 0 0 0.8rem;
+  }
+  .empty-state p { color: var(--ink-muted); font-size: 0.98rem; line-height: 1.7; margin: 0; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap top">
+    <a class="gsmse-logo-link" href="https://gsmse.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" aria-label="KAIST Graduate School of Medical Science and Engineering (opens in new tab)">
+      <img src="assets/images/gsmse-logo.png" alt="KAIST GSMSE">
+    </a>
+    <span class="date">Advanced Cell Engineering Lab</span>
+  </div>
+  <div class="wrap">
+    <a class="brand-row" href="index.html">
+      <img class="lab-logo-mark lab-logo-mark--light" src="assets/images/ace-lab-logo-light.png" alt="">
+      <img class="lab-logo-mark lab-logo-mark--dark" src="assets/images/ace-lab-logo-dark.png" alt="">
+      <span class="wordmark">ACE Lab</span>
+    </a>
+  </div>
+  <ul class="nav-row">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html" class="is-active">People</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="people-hero">
+    <div class="wrap">
+      <h1>People</h1>
+      <ul class="tab-nav" role="tablist">
+        <li><button class="tab-btn is-active" type="button" role="tab" aria-selected="true" data-tab="pi">PI</button></li>
+        <li><button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="members">Members</button></li>
+        <li><button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="alumni">Alumni</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <section class="tab-panel is-active" id="tab-pi" role="tabpanel">
+      <div class="pi-profile">
+        <div class="pi-photos">
+          <img class="pi-photo" src="assets/images/pi-photo-formal.jpg" alt="Ju-Chan Park">
+          <img class="pi-photo" src="assets/images/pi-photo-candid.jpg" alt="Ju-Chan Park">
+        </div>
+        <div>
+          <p class="pi-name">Ju-Chan Park, Ph.D.</p>
+          <p class="pi-title">Principal Investigator</p>
+          <p class="pi-affil">Advanced Cell Engineering Lab, GSMSE, KAIST</p>
+          <p class="pi-bio">Ju-Chan Park leads ACE Lab's work on <strong>context-aware genome editing</strong>, <strong>generative AI for cell engineering</strong>, and <strong>hPSC-based disease modeling &amp; drug screening</strong>. He completed his Ph.D. at the Seoul National University College of Pharmacy, followed by postdoctoral research at the SNU Medical Research Center and a visiting scholarship at Harvard Medical School, before joining KAIST GSMSE as Associate Professor in 2026.</p>
+        </div>
+      </div>
+
+      <div class="cv-blocks">
+        <div class="cv-block cv-block--status">
+          <h3 class="cv-heading">Status</h3>
+          <div class="cv-row">
+            <span class="cv-date">2026 – Present</span>
+            <span class="cv-desc">Associate Professor, GSMSE, KAIST, Daejeon, Korea</span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">2025 – 2026</span>
+            <span class="cv-desc">Visiting Scholar, Harvard Medical School, Boston, MA, USA</span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">2023 – 2026</span>
+            <span class="cv-desc">Postdoctoral Researcher, Medical Research Center, Seoul National University</span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">2018 – 2023</span>
+            <span class="cv-desc">Ph.D., College of Pharmacy, Seoul National University</span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">2013 – 2018</span>
+            <span class="cv-desc">B.S., Department of Life Science / Chemical and Biomolecular Engineering / Integrative Biotechnology <span class="org">(triple major)</span>, Sogang University, Seoul, Korea</span>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <h3 class="cv-heading">Grants</h3>
+          <div class="cv-row">
+            <span class="cv-date">09/2024 – Present</span>
+            <span class="cv-desc">Postdoc Grow-type Joint Research <span class="org">— National Research Foundation of Korea (NRF)</span></span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">05/2024 – Present</span>
+            <span class="cv-desc">Sejong Science Fellowship <span class="org">— National Research Foundation of Korea (NRF)</span></span>
+          </div>
+          <div class="cv-row">
+            <span class="cv-date">03/2019 – 02/2023</span>
+            <span class="cv-desc">Global Ph.D. Fellowship <span class="org">— National Research Foundation of Korea (NRF)</span></span>
+          </div>
+        </div>
+
+        <div class="cv-block">
+          <h3 class="cv-heading">Awards</h3>
+          <p class="award-year">2024</p>
+          <p class="award-item">KAGE Young Scientist Award <span class="org">— Korean Association for Genome Editing</span></p>
+          <p class="award-year">2023</p>
+          <p class="award-item">Chungwoo Award <span class="org">— Seoul National University, College of Pharmacy</span></p>
+          <p class="award-item">Best Learning-lab Project 2023 <span class="org">— Korea Institute of Human Resources Development (KIRD)</span></p>
+          <p class="award-year">2022</p>
+          <p class="award-item">Best Oral Presentation, Young Scientist Award <span class="org">— Korean Society for Stem Cell Research (KSSCR)</span></p>
+          <p class="award-item">Best Presentation Award, Young Scientist Program <span class="org">— Korean Society for Biochemistry and Molecular Biology (KSBMB)</span></p>
+          <p class="award-item">Best Research Award <span class="org">— Korean Society for Biochemistry and Molecular Biology (KSBMB)</span></p>
+          <p class="award-item">Young Investigator's Research Award <span class="org">— Korean Society for Molecular and Cellular Biology (KSMCB)</span></p>
+          <p class="award-year">2021</p>
+          <p class="award-item">Howol Songam Next Generation Academic Award <span class="org">— Howol Songam Foundation</span></p>
+          <p class="award-year">2020</p>
+          <p class="award-item">2020 Bio-Venture Competition, 3rd Prize <span class="org">— Foundation for Medical Innovation</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-members" role="tabpanel">
+      <p class="join-note">ACE Lab is recruiting its founding members for 2026. If you're interested in genome engineering, generative AI for cell engineering, or hPSC-based disease modeling, we'd love to hear from you — contact details coming soon.</p>
+      <div class="open-positions">
+        <div class="open-card">
+          <span class="open-mark">+</span>
+          <div>
+            <p class="open-role">M.S.&ndash;Ph.D. Course</p>
+            <p class="open-status">Recruiting</p>
+          </div>
+        </div>
+        <div class="open-card">
+          <span class="open-mark">+</span>
+          <div>
+            <p class="open-role">Undergraduate Intern</p>
+            <p class="open-status">Recruiting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-alumni" role="tabpanel">
+      <div class="empty-state">
+        <h2>No alumni yet</h2>
+        <p>ACE Lab opened its doors in 2026. Future graduates of the lab will be listed here.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">ACE Lab · KAIST Graduate School of Medical Science and Engineering</div>
+</footer>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".tab-btn");
+    var panels = document.querySelectorAll(".tab-panel");
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var target = btn.getAttribute("data-tab");
+        buttons.forEach(function (b) {
+          b.classList.toggle("is-active", b === btn);
+          b.setAttribute("aria-selected", b === btn ? "true" : "false");
+        });
+        panels.forEach(function (p) {
+          p.classList.toggle("is-active", p.id === "tab-" + target);
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+/* ACE Lab — shared site styles (tokens, masthead, footer) */
+
+:root {
+  --bg: #f5f6f4;
+  --bg-raised: #ffffff;
+  --ink: #1a1a1a;
+  --ink-muted: #6e6e6e;
+  --accent: #a6192e;
+  --accent-ink: #ffffff;
+  --rule: #1a1a1a;
+  --rule-soft: #d8d5cf;
+  --tag-bg: #efece5;
+  --story-dark: #0a0d12;
+  --on-image-ink: #f5f6f4;
+  --on-image-muted: rgba(245, 246, 244, 0.72);
+  --on-image-rule: rgba(245, 246, 244, 0.18);
+  --font-display: "Newsreader", "Iowan Old Style", "Georgia", serif;
+  --font-body: "Public Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Consolas", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17181a;
+    --bg-raised: #1f2123;
+    --ink: #ecebe7;
+    --ink-muted: #9a968e;
+    --accent: #d9788a;
+    --accent-ink: #17181a;
+    --rule: #3a3b3d;
+    --rule-soft: #2c2d2f;
+    --tag-bg: #232527;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #17181a;
+  --bg-raised: #1f2123;
+  --ink: #ecebe7;
+  --ink-muted: #9a968e;
+  --accent: #d9788a;
+  --accent-ink: #17181a;
+  --rule: #3a3b3d;
+  --rule-soft: #2c2d2f;
+  --tag-bg: #232527;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 18.5px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+img { max-width: 100%; }
+
+.wrap { max-width: 74rem; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+/* ---- Masthead nav (every page) ---- */
+.masthead { border-bottom: 3px solid var(--rule); position: relative; z-index: 5; background: var(--bg-raised); }
+.masthead .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.3rem 0 1.1rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead .top .date {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.gsmse-logo-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.gsmse-logo-link img {
+  display: block;
+  height: 0.95rem;
+  width: auto;
+  filter: grayscale(1) opacity(0.7);
+  transition: filter 0.15s ease;
+}
+.gsmse-logo-link:hover img,
+.gsmse-logo-link:focus-visible img {
+  filter: grayscale(0.3) opacity(0.9);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gsmse-logo-link img { filter: grayscale(1) invert(1) opacity(0.72); }
+  :root:not([data-theme="light"]) .gsmse-logo-link:hover img,
+  :root:not([data-theme="light"]) .gsmse-logo-link:focus-visible img { filter: grayscale(0.3) invert(1) opacity(0.92); }
+}
+:root[data-theme="dark"] .gsmse-logo-link img { filter: grayscale(1) invert(1) opacity(0.72); }
+:root[data-theme="dark"] .gsmse-logo-link:hover img,
+:root[data-theme="dark"] .gsmse-logo-link:focus-visible img { filter: grayscale(0.3) invert(1) opacity(0.92); }
+.brand-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.9rem 0 0.2rem;
+  text-decoration: none;
+}
+.lab-logo-mark {
+  height: 3.47rem;
+  width: auto;
+  display: block;
+  margin-bottom: -0.55rem;
+}
+.lab-logo-mark--dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .lab-logo-mark--light { display: none; }
+  :root:not([data-theme="light"]) .lab-logo-mark--dark { display: block; }
+}
+:root[data-theme="dark"] .lab-logo-mark--light { display: none; }
+:root[data-theme="dark"] .lab-logo-mark--dark { display: block; }
+.wordmark {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  text-align: center;
+}
+.nav-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  padding: 0.85rem 0;
+  list-style: none;
+  margin: 0;
+}
+.nav-row a {
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.nav-row a.is-active { color: var(--accent); }
+.nav-row a:hover { color: var(--ink); }
+
+/* ---- Footer (every page) ---- */
+footer {
+  border-top: 3px solid var(--rule);
+  padding: 1.4rem 0 2.4rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

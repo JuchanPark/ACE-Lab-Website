@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News — ACE Lab</title>
+<meta name="description" content="A photo journal of moments from ACE Lab, newest first.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  /* News hero */
+  .news-hero { padding: clamp(2rem, 4.5vw, 3rem) 0 clamp(1.2rem, 2.5vw, 1.6rem); }
+  .news-hero h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  /* Dispatch list */
+  .dispatches { padding-bottom: clamp(2rem, 4vw, 3rem); }
+  .dispatch {
+    padding: clamp(1.8rem, 4vw, 2.6rem) 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .dispatch:last-of-type { border-bottom: none; }
+  .dispatch-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin: 0 0 0.5rem;
+  }
+  .dispatch-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2.3vw, 1.7rem);
+    line-height: 1.28;
+    margin: 0 0 1.3rem;
+    text-wrap: balance;
+  }
+  .dispatch-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.6rem;
+  }
+  .gallery-item {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--rule-soft);
+    background: none;
+    cursor: zoom-in;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+  .gallery-item:hover img { transform: scale(1.045); }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item img { transition: none; }
+    .gallery-item:hover img { transform: none; }
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 9, 11, 0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: clamp(1rem, 5vw, 3rem);
+  }
+  .lightbox.is-open { display: flex; }
+  .lb-img {
+    max-width: 100%;
+    max-height: 88vh;
+    display: block;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  .lb-count {
+    position: fixed;
+    left: 50%;
+    bottom: 1.3rem;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(245, 246, 244, 0.7);
+  }
+  .lb-btn {
+    position: fixed;
+    background: transparent;
+    border: none;
+    color: #f5f6f4;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .lb-btn:hover { color: #ff9fae; }
+  .lb-close {
+    top: 1.2rem;
+    right: clamp(1rem, 4vw, 2rem);
+    font-size: 2rem;
+    font-family: var(--font-body);
+  }
+  .lb-prev, .lb-next {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.6rem;
+    font-family: var(--font-display);
+    padding: 0.5rem 0.9rem;
+  }
+  .lb-prev { left: clamp(0.25rem, 3vw, 1.25rem); }
+  .lb-next { right: clamp(0.25rem, 3vw, 1.25rem); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap top">
+    <a class="gsmse-logo-link" href="https://gsmse.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" aria-label="KAIST Graduate School of Medical Science and Engineering (opens in new tab)">
+      <img src="assets/images/gsmse-logo.png" alt="KAIST GSMSE">
+    </a>
+    <span class="date">Advanced Cell Engineering Lab</span>
+  </div>
+  <div class="wrap">
+    <a class="brand-row" href="index.html">
+      <img class="lab-logo-mark lab-logo-mark--light" src="assets/images/ace-lab-logo-light.png" alt="">
+      <img class="lab-logo-mark lab-logo-mark--dark" src="assets/images/ace-lab-logo-dark.png" alt="">
+      <span class="wordmark">ACE Lab</span>
+    </a>
+  </div>
+  <ul class="nav-row">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="news.html" class="is-active">News</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="news-hero">
+    <div class="wrap">
+      <h1>News</h1>
+    </div>
+  </section>
+
+  <section class="dispatches">
+    <div class="wrap">
+
+      <article class="dispatch">
+        <p class="dispatch-date">August 1, 2026</p>
+        <h2 class="dispatch-title">1st Day of the ACE Lab — Nothing… No One...</h2>
+        <div class="dispatch-gallery">
+          <button class="gallery-item" type="button">
+            <img src="assets/images/news-260801-a.jpg" alt="Empty lab space on ACE Lab's first day — bare white walls, a window bench, and a single sink cabinet.">
+          </button>
+          <button class="gallery-item" type="button">
+            <img src="assets/images/news-260801-b.jpg" alt="View through the lab's glass door into the empty room, before any furniture or people have arrived.">
+          </button>
+          <button class="gallery-item" type="button">
+            <img src="assets/images/news-260801-c.jpg" alt="Another corner of the empty lab, with a KAIST sign taped to the window and a stack of boxes on the floor.">
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">ACE Lab · KAIST Graduate School of Medical Science and Engineering</div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">&#8249;</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo">&#8250;</button>
+  <p class="lb-count" id="lb-count"></p>
+</div>
+
+<script>
+  (function () {
+    var lightbox = document.getElementById("lightbox");
+    var lbImg = document.getElementById("lb-img");
+    var lbCount = document.getElementById("lb-count");
+    var currentSet = [];
+    var currentIndex = 0;
+
+    function show(i) {
+      currentIndex = (i + currentSet.length) % currentSet.length;
+      var item = currentSet[currentIndex];
+      lbImg.src = item.src;
+      lbImg.alt = item.alt;
+      lbCount.textContent = (currentIndex + 1) + " / " + currentSet.length;
+    }
+
+    function open(set, index) {
+      currentSet = set;
+      show(index);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".dispatch").forEach(function (dispatch) {
+      var imgs = Array.prototype.map.call(dispatch.querySelectorAll(".gallery-item img"), function (img) {
+        return { src: img.getAttribute("src"), alt: img.getAttribute("alt") };
+      });
+      dispatch.querySelectorAll(".gallery-item").forEach(function (btn, idx) {
+        btn.addEventListener("click", function () { open(imgs, idx); });
+      });
+    });
+
+    lightbox.querySelector(".lb-close").addEventListener("click", close);
+    lightbox.querySelector(".lb-prev").addEventListener("click", function () { show(currentIndex - 1); });
+    lightbox.querySelector(".lb-next").addEventListener("click", function () { show(currentIndex + 1); });
+    lightbox.addEventListener("click", function (e) { if (e.target === lightbox) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(currentIndex - 1);
+      if (e.key === "ArrowRight") show(currentIndex + 1);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — ACE Lab</title>
+<meta name="description" content="ACE Lab's two research directions: context-aware genome editing for cell and gene therapy, and hPSC-based variomics for disease modeling and drug discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  /* Research hero */
+  .r-hero { padding: clamp(2.6rem, 6vw, 4.2rem) 0 clamp(2rem, 4vw, 3rem); }
+  .r-hero .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+  .r-hero h1 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3.9vw, 3.5rem);
+    line-height: 1.08;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  /* Figure card, reused across the page */
+  .r-figure {
+    background: var(--bg-raised);
+    border: 1px solid var(--rule-soft);
+    padding: clamp(1rem, 2.5vw, 1.75rem);
+    margin: 0;
+  }
+  .r-figure img { display: block; width: 100%; height: auto; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .r-figure img { filter: brightness(0.85); }
+  }
+  :root[data-theme="dark"] .r-figure img { filter: brightness(0.85); }
+  .r-figure figcaption {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule-soft);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--ink-muted);
+  }
+  .fig-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+  .r-hero .r-figure { margin-top: clamp(2rem, 4vw, 2.75rem); }
+
+  /* Direction sections */
+  .direction { padding: clamp(2.75rem, 5.5vw, 4.5rem) 0; border-bottom: 1px solid var(--rule-soft); }
+  .direction:last-of-type { border-bottom: none; }
+  .direction-head {
+    display: flex;
+    gap: 1.1rem;
+    align-items: baseline;
+    margin-bottom: 1.1rem;
+  }
+  .direction-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--accent);
+    line-height: 1;
+    flex: none;
+  }
+  .direction h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 0 0 0.55rem;
+    text-wrap: balance;
+  }
+  .direction-dek {
+    color: var(--ink-muted);
+    font-size: 1.02rem;
+    max-width: 48rem;
+    margin: 0;
+  }
+  .direction-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin: 1.9rem 0 2.25rem;
+  }
+  .topic { border-top: 2px solid var(--rule); padding-top: 0.9rem; }
+  .topic h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 0 0 0.55rem;
+  }
+  .topic p {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap top">
+    <a class="gsmse-logo-link" href="https://gsmse.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" aria-label="KAIST Graduate School of Medical Science and Engineering (opens in new tab)">
+      <img src="assets/images/gsmse-logo.png" alt="KAIST GSMSE">
+    </a>
+    <span class="date">Advanced Cell Engineering Lab</span>
+  </div>
+  <div class="wrap">
+    <a class="brand-row" href="index.html">
+      <img class="lab-logo-mark lab-logo-mark--light" src="assets/images/ace-lab-logo-light.png" alt="">
+      <img class="lab-logo-mark lab-logo-mark--dark" src="assets/images/ace-lab-logo-dark.png" alt="">
+      <span class="wordmark">ACE Lab</span>
+    </a>
+  </div>
+  <ul class="nav-row">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html" class="is-active">Research</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="people.html">People</a></li>
+    <li><a href="news.html">News</a></li>
+  </ul>
+</header>
+
+<main>
+  <section class="r-hero">
+    <div class="wrap">
+      <p class="kicker">Research</p>
+      <h1>How can we cure genetic diseases?</h1>
+      <figure class="r-figure">
+        <img src="assets/images/research-overview.png" alt="Diagram showing two paths from a disease-causing mutation to a cure: correcting the mutation in vivo or ex vivo, and investigating the mutation to reveal its mechanism and develop mutation-specific drugs.">
+        <figcaption><span class="fig-label">Figure 1</span>Two paths from a disease-causing mutation to a cure — correcting it directly, or investigating it to guide mutation-specific treatment.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="direction">
+    <div class="wrap">
+      <div class="direction-head">
+        <span class="direction-num">01</span>
+        <div>
+          <h2>Cell &amp; Gene Therapy</h2>
+          <p class="direction-dek">Context-aware genome editing tools — tailored to each cellular context for greater precision, efficiency, and safety.</p>
+        </div>
+      </div>
+      <div class="direction-topics">
+        <div class="topic">
+          <h3>Cell Context × Genome Editing × Artificial Intelligence</h3>
+          <p>We investigate how cellular states and cell-type-specific biology shape the efficiency, precision, and outcomes of genome editing. We use generative AIs to control cellular factors that determine genome editing outcomes. AI-designed de novo proteins are integrated with next-generation editors to create genome editing systems optimized for specific cellular contexts.</p>
+        </div>
+        <div class="topic">
+          <h3>Cell &amp; Gene Therapy</h3>
+          <p>We translate context-aware genome editing into therapeutic strategies. From long-DNA replacement in patient-derived iPSCs to organ-specific genome editing, we aim to develop next-generation ex vivo and in vivo therapies capable of correcting diverse disease-causing mutations.</p>
+        </div>
+      </div>
+      <figure class="r-figure">
+        <img src="assets/images/research-context-aware-editing.png" alt="Roadmap of context-aware genome editing research: Step 1, understanding hPSC characteristics in base editors and prime editors; Step 2, developing hPSC-specialized base and prime editors; Step 3, AI-driven development of precise genome editing tools, with supporting figures from JC Park et al., Molecular Therapy Nucleic Acids 2022 and 2023, Nature Communications 2024, and Cell 2025.">
+        <figcaption><span class="fig-label">Figure 2</span>Development of context-aware genome editing — from characterizing hPSC-specific editing outcomes to AI-driven design of precision editing tools. J.C. Park et al., <i>Molecular Therapy – Nucleic Acids</i>, 2022 &amp; 2023; <i>Nature Communications</i>, 2024; <i>Cell</i>, 2025.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="direction">
+    <div class="wrap">
+      <div class="direction-head">
+        <span class="direction-num">02</span>
+        <div>
+          <h2>Disease Modeling &amp; Drug Discovery</h2>
+          <p class="direction-dek">A variomics platform built on human pluripotent stem cells — modeling genetic disease and powering mutation-specific drug discovery.</p>
+        </div>
+      </div>
+      <div class="direction-topics">
+        <div class="topic">
+          <h3>hPSC Variomics</h3>
+          <p>We develop scalable genome engineering platforms that introduce large libraries of genetic variants into human pluripotent stem cells. This enables systematic and quantitative analysis of disease-associated variants in genetically controlled human models.</p>
+        </div>
+        <div class="topic">
+          <h3>Mutation-Specific Drug Discovery</h3>
+          <p>Single-cell multi-omics and phenotypic screening connect individual genetic variants with disease mechanisms and therapeutic responses. By resolving how different mutations within the same disease gene respond to treatment, we aim to enable mutation-specific therapeutic discovery and precision medicine.</p>
+        </div>
+      </div>
+      <figure class="r-figure">
+        <img src="assets/images/research-variomics-platform.png" alt="Diagram of the variomics platform: introducing barcoded gene-of-interest mutant libraries into hPSCs via precise genome editing, differentiating the edited cells into neurons, then analyzing them by single-cell multi-omics and drug screening.">
+        <figcaption><span class="fig-label">Figure 3</span>Development of a variomics platform for mutation-specific disease mechanisms and drug discovery — from barcoded variant libraries in hPSCs, through differentiation, to single-cell multi-omics analysis and drug screening.</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">ACE Lab · KAIST Graduate School of Medical Science and Engineering</div>
+</footer>
+</body>
+</html>
