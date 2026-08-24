@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,8 +186,8 @@
   /* In this issue quadrant */
   .q-toc {
     grid-area: toc;
-    background: var(--bg);
-    border-right: 1px solid var(--rule-soft);
+    background: rgba(9, 11, 15, 0.5);
+    border-right: 1px solid var(--on-image-rule);
   }
   .q-toc .head {
     display: flex;
@@ -263,7 +263,7 @@
   /* Members quadrant */
   .q-members {
     grid-area: members;
-    background: var(--bg-raised);
+    background: rgba(9, 11, 15, 0.5);
     display: flex;
     flex-direction: column;
   }
@@ -375,6 +375,8 @@
 </head>
 <body>
 
+<div class="cosmic-bg" aria-hidden="true"></div>
+
 <header class="masthead">
   <div class="wrap top">
     <a class="gsmse-logo-link" href="https://gsmse.kaist.ac.kr/" target="_blank" rel="noopener noreferrer" aria-label="KAIST Graduate School of Medical Science and Engineering (opens in new tab)">
@@ -484,7 +486,7 @@
         <div>
           <p class="mw-name">Ju-Chan Park</p>
           <p class="mw-role">Principal Investigator</p>
-          <p class="mw-joined">Welcome to the SPACE Lab!</p>
+          <p class="mw-joined">Welcome to our space!</p>
         </div>
       </div>
       <div class="mw-slide">
@@ -600,5 +602,6 @@
     carousel(document.querySelector(".q-members"), ".mw-slide", ".mw-dots .dot", ".mw-pause", 4500);
   })();
 </script>
+<script src="assets/js/site.js"></script>
 </body>
 </html>
