@@ -12,9 +12,9 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduced) return;
 
-  var MIN_PCT = 8;
-  var MAX_PCT = 40;
-  var PX_FOR_FULL_RANGE = 2400; // scrolling this many px pans through the full range
+  var MIN_PCT = 6;
+  var MAX_PCT = 26;
+  var PX_FOR_FULL_RANGE = 2600; // scrolling this many px pans through the full range
   var ticking = false;
 
   function update() {
