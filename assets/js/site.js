@@ -1,8 +1,10 @@
 // SPACE Lab — shared site behavior
 // Slowly pans the cosmic backdrop's background-position as the page scrolls,
 // so it feels like the imagery drifts by rather than sitting perfectly still.
-// The pan is normalized to each page's own scroll range, so it never needs
-// to traverse the whole image top-to-bottom to read as motion.
+// The pan speed is tied to actual pixels scrolled (not to each page's own
+// scroll range), so short pages like Home or News drift gently instead of
+// racing through the same range in a few hundred pixels. It never needs to
+// traverse the whole image top-to-bottom to read as motion.
 (function () {
   var bg = document.querySelector(".cosmic-bg");
   if (!bg) return;
@@ -11,13 +13,12 @@
   if (reduced) return;
 
   var MIN_PCT = 8;
-  var MAX_PCT = 55;
+  var MAX_PCT = 40;
+  var PX_FOR_FULL_RANGE = 2400; // scrolling this many px pans through the full range
   var ticking = false;
 
   function update() {
-    var doc = document.documentElement;
-    var maxScroll = doc.scrollHeight - window.innerHeight;
-    var frac = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
+    var frac = Math.min(1, Math.max(0, window.scrollY / PX_FOR_FULL_RANGE));
     var pct = MIN_PCT + frac * (MAX_PCT - MIN_PCT);
     bg.style.backgroundPositionY = pct + "%";
     ticking = false;
